@@ -1,15 +1,15 @@
 var express = require('express');
 var path = require('path');
 var app =express();
-//1 ÒıÈëÄ£°åÒıÇæ
+//1 å¼•å…¥æ¨¡æ¿å¼•æ“
 app.set('view engine','html');
-//2.ÉèÖÃÄ£°å´æ·ÅÄ¿Â¼
+//2.è®¾ç½®æ¨¡æ¿å­˜æ”¾ç›®å½•
 app.set('views',path.resolve('views'));
-//3 ÉèÖÃäÖÈ¾µÄ·½·¨
+//3 è®¾ç½®æ¸²æŸ“çš„æ–¹æ³•
 app.engine('.html',require('ejs').__express);
 var bodyParser = require('body-parser');
 var session = require('express-session');
-//ÇëÇóÌå´¦ÀíÖĞ¼ä¼ş£¬°ÑÇëÇóÌå×ª³É¶ÔÏó·ÅÔÚreq.bodyÉÏ
+//è¯·æ±‚ä½“å¤„ç†ä¸­é—´ä»¶ï¼ŒæŠŠè¯·æ±‚ä½“è½¬æˆå¯¹è±¡æ”¾åœ¨req.bodyä¸Š
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
     resave:true,
@@ -27,14 +27,13 @@ app.get('/login',function(req,res){
     res.render('login');
 });
 app.post('/login',function(req,res){
-    var user = req.body;//µÃµ½bodyParser´«µİ¸øÎÒÃÇµÄÇëÇóÌå
+    var user = req.body;
     if(user.username == user.password){
-        req.session.username = user.username;//°ÑÓÃ»§ÃûĞ´Èësession
-        res.redirect('/user');//Çë¿Í»§¶ËÏòĞÂµÄÂ·¾¶·¢ÆğÇëÇó
+        req.session.username = user.username;
+        res.redirect('/user');
     }
 });
-
 app.get('/user',checkLogin,function(req,res){
     res.render('user',{username:req.session.username});
 });
-app.listen(9090);
+app.listen(66666);
